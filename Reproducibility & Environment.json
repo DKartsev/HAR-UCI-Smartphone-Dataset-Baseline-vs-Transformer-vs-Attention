@@ -1,0 +1,347 @@
+{
+  "created_at_utc": "2026-02-13T00:47:05.712754Z",
+  "runtime": {
+    "python": "3.12.12",
+    "platform": "Linux-6.6.105+-x86_64-with-glibc2.35",
+    "device": "cuda",
+    "seed": 42
+  },
+  "dataset": {
+    "name": "UCI HAR Dataset",
+    "path": "/content/UCI HAR Dataset",
+    "channels": [
+      "body_acc_x",
+      "body_acc_y",
+      "body_acc_z",
+      "body_gyro_x",
+      "body_gyro_y",
+      "body_gyro_z",
+      "total_acc_x",
+      "total_acc_y",
+      "total_acc_z"
+    ],
+    "window_length": 128,
+    "num_classes": 6,
+    "class_names": [
+      "WALKING",
+      "WALKING_UPSTAIRS",
+      "WALKING_DOWNSTAIRS",
+      "SITTING",
+      "STANDING",
+      "LAYING"
+    ]
+  },
+  "global_hyperparameters_base_transformer": {
+    "BATCH_SIZE": 128,
+    "EPOCHS": 50,
+    "LR": 0.001,
+    "WEIGHT_DECAY": 0.0001,
+    "D_MODEL": 64,
+    "NHEAD": 4,
+    "NUM_LAYERS": 2,
+    "DIM_FF": 128,
+    "DROPOUT": 0.1,
+    "PATIENCE": 5,
+    "LABEL_SMOOTHING": 0.05
+  },
+  "experiment_configs": {
+    "IMPROVED_CFG": {
+      "d_model": 128,
+      "nhead": 8,
+      "num_layers": 4,
+      "dim_ff": 256,
+      "dropout": 0.2,
+      "lr": 0.0008,
+      "weight_decay": 0.001,
+      "epochs": 45,
+      "patience": 10,
+      "label_smoothing": 0.03,
+      "mixup_alpha": 0.25,
+      "grad_clip": 1.0,
+      "ema_decay": 0.999,
+      "warmup_epochs": 5
+    },
+    "IMPROVED_CFG_V2": {
+      "d_model": 96,
+      "nhead": 4,
+      "num_layers": 3,
+      "dim_ff": 192,
+      "dropout": 0.1,
+      "lr": 0.0004,
+      "weight_decay": 0.0003,
+      "epochs": 60,
+      "patience": 12,
+      "label_smoothing": 0.0,
+      "mixup_alpha": 0.0,
+      "grad_clip": 0.7,
+      "ema_decay": 0.997,
+      "warmup_epochs": 3
+    },
+    "IMPROVED_CFG_V3": {
+      "d_model": 128,
+      "nhead": 8,
+      "num_layers": 3,
+      "dim_ff": 256,
+      "dropout": 0.05,
+      "lr": 0.0003,
+      "weight_decay": 0.0001,
+      "epochs": 80,
+      "patience": 15,
+      "label_smoothing": 0.0,
+      "mixup_alpha": 0.0,
+      "grad_clip": 1.0,
+      "ema_decay": 0.995,
+      "warmup_epochs": 5
+    },
+    "SE_CFG": {
+      "d_model": 128,
+      "nhead": 8,
+      "num_layers": 3,
+      "dim_ff": 256,
+      "dropout": 0.08,
+      "lr": 0.0003,
+      "weight_decay": 0.0001,
+      "epochs": 70,
+      "patience": 12,
+      "label_smoothing": 0.0,
+      "mixup_alpha": 0.0,
+      "grad_clip": 1.0,
+      "ema_decay": 0.995,
+      "warmup_epochs": 5,
+      "se_reduction": 3
+    },
+    "WIN_CFG": {
+      "d_model": 128,
+      "nhead": 8,
+      "num_layers": 3,
+      "dim_ff": 256,
+      "dropout": 0.08,
+      "lr": 0.0003,
+      "weight_decay": 0.0001,
+      "epochs": 70,
+      "patience": 12,
+      "label_smoothing": 0.0,
+      "mixup_alpha": 0.0,
+      "grad_clip": 1.0,
+      "ema_decay": 0.995,
+      "warmup_epochs": 5,
+      "window_size": 16
+    },
+    "WINDOW_CFG": null
+  },
+  "checkpoints": {
+    "baseline_transformer": {
+      "path": "/content/best_har_transformer.pt",
+      "best_epoch": 49,
+      "best_val_macro_f1": 0.9803448941310902
+    },
+    "improved_transformer": {
+      "path": "None",
+      "best_epoch": null,
+      "best_val_macro_f1": null
+    },
+    "se_transformer": {
+      "path": "/content/best_har_transformer_se.pt",
+      "best_epoch": 49,
+      "best_val_macro_f1": 0.9803448941310902
+    },
+    "windowed_transformer": {
+      "path": "/content/best_har_transformer_windowed.pt",
+      "best_epoch": null,
+      "best_val_macro_f1": null
+    }
+  },
+  "timing_seconds": {
+    "logreg_baseline_seconds": 4.709569255999895,
+    "transformer_baseline_seconds": 29.948647187999995,
+    "improved_transformer_seconds": 158.51882621999994,
+    "se_transformer_seconds": 200.6904198960001,
+    "windowed_transformer_seconds": 182.47832848399958
+  },
+  "test_metrics": {
+    "logreg_baseline": {
+      "Accuracy": 0.9538513742789277,
+      "Macro Precision": 0.9568750848314104,
+      "Macro Recall": 0.9526040523279383,
+      "Macro F1": 0.9538031271205923
+    },
+    "transformer_baseline": null,
+    "improved_transformer": {
+      "accuracy": 0.9046487953851374,
+      "macro_precision": 0.9052491242239902,
+      "macro_recall": 0.9057004298930269,
+      "macro_f1": 0.9043898042521406
+    },
+    "se_transformer": {
+      "accuracy": 0.9009161859518154,
+      "macro_precision": 0.9012545520373026,
+      "macro_recall": 0.9010898052226263,
+      "macro_f1": 0.900061880779076
+    },
+    "windowed_transformer": {
+      "accuracy": 0.8975229046487954,
+      "macro_precision": 0.8973839660208879,
+      "macro_recall": 0.8984149327176422,
+      "macro_f1": 0.8973379750374405
+    }
+  },
+  "history_summaries": {
+    "baseline_transformer": {
+      "train_loss": {
+        "len": 25,
+        "last": 0.341362921052635,
+        "best": 0.341362921052635
+      },
+      "val_loss": {
+        "len": 25,
+        "last": 0.33774198511682507,
+        "best": 0.33774198511682507
+      },
+      "train_acc": {
+        "len": 25,
+        "last": 0.9525590885903757,
+        "best": 0.9547695970073117
+      },
+      "val_acc": {
+        "len": 25,
+        "last": 0.964649898028552,
+        "best": 0.9660095173351462
+      },
+      "train_f1": {
+        "len": 25,
+        "last": 0.9562271532587109,
+        "best": 0.9582743621678743
+      },
+      "val_f1": {
+        "len": 25,
+        "last": 0.9671171827617399,
+        "best": 0.9682793661519767
+      },
+      "lr": {
+        "len": 25,
+        "last": 0.0004999999999999998,
+        "best": 0.0009990133642141358
+      }
+    },
+    "improved_transformer": {
+      "train_loss": {
+        "len": 37,
+        "last": 0.5225468952220793,
+        "best": 0.47239192961491083
+      },
+      "val_loss": {
+        "len": 37,
+        "last": 0.28097847525478625,
+        "best": 0.28097847525478625
+      },
+      "train_acc": {
+        "len": 37,
+        "last": 0.5910559428668594,
+        "best": 0.6731848325114776
+      },
+      "val_acc": {
+        "len": 37,
+        "last": 0.9605710401087696,
+        "best": 0.9660095173351462
+      },
+      "train_f1": {
+        "len": 37,
+        "last": 0.591614796121958,
+        "best": 0.674429834097936
+      },
+      "val_f1": {
+        "len": 37,
+        "last": 0.9636509282819715,
+        "best": 0.9685064324511554
+      },
+      "lr": {
+        "len": 37,
+        "last": 0.000148753882025019,
+        "best": 0.0008
+      }
+    },
+    "se_transformer": {
+      "train_loss": {
+        "len": 61,
+        "last": 0.03528792952557766,
+        "best": 0.03465720923081271
+      },
+      "val_loss": {
+        "len": 61,
+        "last": 0.05277678696407014,
+        "best": 0.048648762667993554
+      },
+      "train_acc": {
+        "len": 61,
+        "last": 0.9823159326645129,
+        "best": 0.9823159326645129
+      },
+      "val_acc": {
+        "len": 61,
+        "last": 0.9782460910944936,
+        "best": 0.9789259007477906
+      },
+      "train_f1": {
+        "len": 61,
+        "last": 0.9836995398113285,
+        "best": 0.9836995398113285
+      },
+      "val_f1": {
+        "len": 61,
+        "last": 0.9795919138117782,
+        "best": 0.9803448941310902
+      },
+      "lr": {
+        "len": 61,
+        "last": 4.257196128517637e-05,
+        "best": 0.0003
+      }
+    },
+    "windowed_transformer": {
+      "train_loss": {
+        "len": 60,
+        "last": 0.042297871352316385,
+        "best": 0.042297871352316385
+      },
+      "val_loss": {
+        "len": 60,
+        "last": 0.056696670385043405,
+        "best": 0.05661676592686746
+      },
+      "train_acc": {
+        "len": 60,
+        "last": 0.9767046420676756,
+        "best": 0.9767046420676756
+      },
+      "val_acc": {
+        "len": 60,
+        "last": 0.9714479945615228,
+        "best": 0.9714479945615228
+      },
+      "train_f1": {
+        "len": 60,
+        "last": 0.9785119660302498,
+        "best": 0.9785119660302498
+      },
+      "val_f1": {
+        "len": 60,
+        "last": 0.973396962065912,
+        "best": 0.9734264922414636
+      },
+      "lr": {
+        "len": 60,
+        "last": 4.546343653681667e-05,
+        "best": 0.0003
+      }
+    }
+  },
+  "library_versions": {
+    "python": "3.12.12",
+    "numpy": "2.0.2",
+    "pandas": "2.2.2",
+    "torch": "2.9.0+cu128",
+    "sklearn": "1.6.1",
+    "matplotlib": "3.10.0",
+    "seaborn": "0.13.2"
+  }
+}
